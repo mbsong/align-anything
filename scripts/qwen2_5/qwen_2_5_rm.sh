@@ -16,11 +16,12 @@
 # ==============================================================================
 
 
-MODEL_NAME_OR_PATH="Qwen/Qwen2.5-0.5B-Instruct" # model path
+MODEL_NAME_OR_PATH="/data/Qwen2.5-0.5B-Instruct" # model path
+#MODEL_NAME_OR_PATH="/root/align-anything/outputs/qwen_2_5_rm_1_epoch_all/slice_end"
 
-TRAIN_DATASETS="../assets/text_to_text/preference" # rm dataset path
-TRAIN_TEMPLATE="PKUSafeRLHF" # dataset template
-TRAIN_SPLIT="train" # split the dataset
+TRAIN_DATASETS="/data/align_anything_t2t" # rm dataset path
+TRAIN_TEMPLATE="HOMEWORK" # dataset template
+TRAIN_SPLIT="train" # split the dataset train or validation
 
 OUTPUT_ROOT_DIR=$OUTPUT_ROOT_DIR
 
@@ -29,10 +30,10 @@ if [ -z "$OUTPUT_ROOT_DIR" ]; then
     OUTPUT_ROOT_DIR="../outputs"
 fi
 
-OUTPUT_DIR="${OUTPUT_ROOT_DIR}/qwen_2_5_rm" # output dir
+OUTPUT_DIR="${OUTPUT_ROOT_DIR}/qwen_2_5_rm_2_epoch_all" # output dir
 
 # For wandb online logging
-export WANDB_API_KEY=""
+export WANDB_API_KEY="5ea1c789da21c8bf10adbc57b725a39f8a69290b"
 
 # Source the setup script
 source ./setup.sh
@@ -46,4 +47,4 @@ deepspeed \
      --train_datasets ${TRAIN_DATASETS} \
      --train_split ${TRAIN_SPLIT} \
      --output_dir ${OUTPUT_DIR} \
-     --epochs 1 
+     --epochs 2
